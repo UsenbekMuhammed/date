@@ -319,3 +319,98 @@ input:focus {
 #musicBtn:hover {
   transform: scale(1.1);
 }
+.envelope-screen {
+  display: none;
+  margin-top: 20px;
+  animation: envelopeAppear 0.8s ease;
+}
+
+@keyframes envelopeAppear {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  background: linear-gradient(135deg, #ff9fcb, #ff6faf);
+  border-radius: 26px;
+  padding: 22px;
+  box-shadow: 0 20px 45px rgba(255, 79, 154, 0.35);
+  overflow: hidden;
+}
+
+.envelope::before,
+.envelope::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  height: 55%;
+  background: rgba(255,255,255,0.18);
+  z-index: 1;
+}
+
+.envelope::before {
+  left: 0;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.envelope::after {
+  right: 0;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 52%;
+  background: #ff82bd;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  animation: openFlap 1s ease forwards;
+  transform-origin: top;
+  z-index: 3;
+}
+
+@keyframes openFlap {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(180deg);
+  }
+}
+
+.letter {
+  position: relative;
+  z-index: 2;
+  background: #fff7fc;
+  border-radius: 24px;
+  padding: 22px 16px;
+  color: #ff4f9a;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.6;
+  box-shadow: 0 10px 25px rgba(255, 79, 154, 0.2);
+  animation: letterUp 1s ease 0.4s both;
+}
+
+@keyframes letterUp {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
