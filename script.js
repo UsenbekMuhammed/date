@@ -8,8 +8,7 @@ const question = document.getElementById("question");
 const catGif = document.getElementById("catGif");
 const dateInput = document.getElementById("dateInput");
 const timeInput = document.getElementById("timeInput");
-const finalText = document.getElementById("finalText");
-const envelopeScreen = document.getElementById("envelopeScreen");
+const openLetterBtn = document.getElementById("openLetterBtn");
 const placeButtons = document.querySelectorAll(".place");
 
 let musicStarted = false;
@@ -43,28 +42,21 @@ function fadeMusicTo(targetVolume) {
   let volume = bgMusic.volume;
 
   const fadeMusic = setInterval(() => {
-    if (volume < targetVolume) {
-      volume += 0.03;
-    } else {
+    volume += 0.03;
+
+    if (volume >= targetVolume) {
+      volume = targetVolume;
       clearInterval(fadeMusic);
     }
 
-    bgMusic.volume = Math.min(volume, targetVolume);
+    bgMusic.volume = volume;
   }, 250);
 }
 
-function setNoPosition() {
-  const yesRect = yesBtn.getBoundingClientRect();
-
-  noBtn.style.left = yesRect.right + 18 + "px";
-  noBtn.style.top = yesRect.top + "px";
-}
-
-window.addEventListener("load", setNoPosition);
-window.addEventListener("resize", setNoPosition);
-
 function moveNoButton() {
   noClickCount++;
+
+  noBtn.style.position = "fixed";
 
   const padding = 20;
   const maxX = window.innerWidth - noBtn.offsetWidth - padding;
@@ -192,13 +184,9 @@ function bigCelebration() {
 
   for (let i = 0; i < 35; i++) {
     setTimeout(() => {
-      createHeart(
-        Math.random() * window.innerWidth,
-        window.innerHeight - 80
-      );
+      createHeart(Math.random() * window.innerWidth, window.innerHeight - 80);
     }, i * 45);
   }
 }
 
 createPetals();
-const openLetterBtn = document.getElementById("openLetterBtn");
