@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plan Your Date 💐</title>
+  <title>Анель, plan your date 💐</title>
 
   <style>
     * {
@@ -15,23 +15,23 @@
       margin: 0;
       min-height: 100vh;
       overflow: hidden;
-      background: linear-gradient(135deg, #ffe6f2, #fff6dc, #e7f8ef);
+      background: linear-gradient(135deg, #ffe6f2, #fff3d9, #e9fff3);
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
     .card {
-      width: 90%;
-      max-width: 430px;
-      padding: 35px 25px;
+      width: 92%;
+      max-width: 460px;
+      padding: 30px 24px;
       border-radius: 35px;
-      background: rgba(255, 255, 255, 0.86);
-      box-shadow: 0 20px 60px rgba(255, 120, 170, 0.35);
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 25px 70px rgba(255, 105, 180, 0.35);
       text-align: center;
       position: relative;
       z-index: 5;
-      animation: pop 0.8s ease;
+      animation: pop 0.7s ease;
     }
 
     @keyframes pop {
@@ -41,20 +41,39 @@
 
     h1 {
       color: #ff5fa8;
-      font-size: 34px;
-      margin: 0 0 12px;
+      font-size: 31px;
+      margin: 0 0 10px;
     }
 
     p {
       color: #8b5e6b;
-      font-size: 19px;
-      margin-bottom: 28px;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .cat {
+      font-size: 70px;
+      margin: 10px 0;
+      animation: catIdle 1.8s infinite ease-in-out;
+    }
+
+    .cat.happy {
+      animation: catHappy 0.45s infinite alternate;
+    }
+
+    @keyframes catIdle {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+
+    @keyframes catHappy {
+      from { transform: scale(1) rotate(-8deg); }
+      to { transform: scale(1.18) rotate(8deg); }
     }
 
     .buttons {
       display: flex;
       justify-content: center;
-      align-items: center;
       gap: 18px;
       min-height: 75px;
     }
@@ -62,22 +81,18 @@
     button {
       border: none;
       border-radius: 999px;
-      padding: 14px 28px;
-      font-size: 18px;
+      padding: 13px 24px;
+      font-size: 17px;
       cursor: pointer;
       transition: 0.25s ease;
       white-space: nowrap;
     }
 
     #yesBtn {
-      background: linear-gradient(135deg, #ff77b7, #ff4f9a);
+      background: linear-gradient(135deg, #ff78b7, #ff4f9a);
       color: white;
       box-shadow: 0 10px 25px rgba(255, 79, 154, 0.45);
       z-index: 10;
-    }
-
-    #yesBtn:hover {
-      transform: scale(1.08);
     }
 
     #noBtn {
@@ -88,167 +103,171 @@
       z-index: 20;
     }
 
-    .message {
+    .planner {
       display: none;
-      margin-top: 24px;
-      font-size: 24px;
-      color: #ff4f9a;
+      margin-top: 20px;
       animation: pop 0.6s ease;
     }
 
-    .flower {
-      position: absolute;
-      font-size: 28px;
-      opacity: 0.8;
-      animation: float 5s infinite ease-in-out;
-      pointer-events: none;
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 15px;
+      border: 1px solid #ffc1df;
+      font-size: 16px;
+      color: #8b5e6b;
+      background: #fff8fc;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-25px) rotate(12deg); }
+    .places {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .place {
+      background: #fff0f8;
+      color: #ff4f9a;
+      border: 2px solid #ffc1df;
+      padding: 12px;
+      border-radius: 18px;
+      font-size: 15px;
+    }
+
+    .place.selected {
+      background: #ff7fbd;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .final {
+      display: none;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 22px;
+      background: #fff0f8;
+      color: #ff4f9a;
+      font-size: 17px;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+
+    .petal, .firework {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
     }
 
     .petal {
-      position: absolute;
       top: -30px;
       font-size: 22px;
       animation: fall linear infinite;
-      pointer-events: none;
-      opacity: 0.8;
     }
 
     @keyframes fall {
-      to {
-        transform: translateY(110vh) rotate(360deg);
-      }
+      to { transform: translateY(110vh) rotate(360deg); }
     }
 
-    .heart {
-      position: fixed;
-      font-size: 24px;
-      animation: heartUp 1.4s ease forwards;
-      pointer-events: none;
-      z-index: 100;
+    .firework {
+      font-size: 26px;
+      animation: boom 1.2s ease-out forwards;
+      z-index: 50;
     }
 
-    @keyframes heartUp {
+    @keyframes boom {
       from {
-        transform: translateY(0) scale(1);
+        transform: scale(0.4);
         opacity: 1;
       }
       to {
-        transform: translateY(-120px) scale(1.8);
+        transform: scale(2.2) translateY(-90px);
         opacity: 0;
       }
     }
 
-    .date-box {
-      display: none;
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 22px;
-      background: #fff3fa;
-      color: #8b5e6b;
-      font-size: 16px;
-    }
-
-    .date-box input {
-      margin-top: 8px;
-      padding: 10px;
-      border-radius: 12px;
-      border: 1px solid #ffc1df;
-      width: 100%;
-      font-size: 15px;
-    }
-
-    .final-text {
-      margin-top: 12px;
-      font-weight: bold;
-      color: #ff4f9a;
-    }
-
     @media (max-width: 480px) {
-      h1 { font-size: 28px; }
-      p { font-size: 17px; }
-      button { font-size: 16px; padding: 12px 22px; }
+      h1 { font-size: 26px; }
+      .cat { font-size: 62px; }
+      button { font-size: 15px; padding: 11px 20px; }
+      .places { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
-  <div class="flower" style="top: 8%; left: 12%;">🌸</div>
-  <div class="flower" style="top: 18%; right: 10%;">🌷</div>
-  <div class="flower" style="bottom: 14%; left: 16%;">🌼</div>
-  <div class="flower" style="bottom: 20%; right: 14%;">💐</div>
 
   <div class="card">
-    <h1>Plan Your Date 💐</h1>
+    <h1>Анель, привет 💐</h1>
+
+    <div class="cat" id="cat">🐱💗</div>
+
     <p id="question">Пойдёшь со мной на свидание?</p>
 
-    <div class="buttons">
+    <div class="buttons" id="mainButtons">
       <button id="yesBtn">Да 💖</button>
       <button id="noBtn">Нет 😅</button>
     </div>
 
-    <div class="message" id="message">
-      Урааа! Я знал 💘
-    </div>
+    <div class="planner" id="planner">
+      <p>Урааа! Тогда выбирай наш план 💘</p>
 
-    <div class="date-box" id="dateBox">
-      Теперь выбери день нашего свидания 🌙
       <input type="date" id="dateInput" />
       <input type="time" id="timeInput" />
-      <div class="final-text" id="finalText"></div>
+
+      <p>Куда пойдём?</p>
+
+      <div class="places">
+        <button class="place">🌳 Парк</button>
+        <button class="place">🍝 Ресторан</button>
+        <button class="place">🎬 Кинотеатр</button>
+        <button class="place">🍟 Мак</button>
+        <button class="place">☕ Кофейня</button>
+        <button class="place">🌆 Прогулка</button>
+      </div>
+
+      <div class="final" id="finalText"></div>
     </div>
   </div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
-    const message = document.getElementById("message");
-    const dateBox = document.getElementById("dateBox");
+    const planner = document.getElementById("planner");
+    const cat = document.getElementById("cat");
+    const question = document.getElementById("question");
     const dateInput = document.getElementById("dateInput");
     const timeInput = document.getElementById("timeInput");
     const finalText = document.getElementById("finalText");
+    const placeButtons = document.querySelectorAll(".place");
 
     let yesScale = 1;
     let noScale = 1;
-    let noClicks = 0;
+    let selectedPlace = "";
 
-    function setNoStartPosition() {
-      const rect = yesBtn.getBoundingClientRect();
-      noBtn.style.left = rect.right + 18 + "px";
-      noBtn.style.top = rect.top + "px";
+    function setNoPosition() {
+      noBtn.style.left = "55%";
+      noBtn.style.top = "55%";
     }
 
-    window.addEventListener("load", setNoStartPosition);
-    window.addEventListener("resize", setNoStartPosition);
+    window.addEventListener("load", setNoPosition);
 
     function moveNoButton() {
-      noClicks++;
-
       const maxX = window.innerWidth - noBtn.offsetWidth - 20;
       const maxY = window.innerHeight - noBtn.offsetHeight - 20;
 
-      const randomX = Math.max(10, Math.random() * maxX);
-      const randomY = Math.max(10, Math.random() * maxY);
-
-      noBtn.style.left = randomX + "px";
-      noBtn.style.top = randomY + "px";
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top = Math.random() * maxY + "px";
 
       yesScale += 0.18;
-      noScale -= 0.08;
+      noScale -= 0.07;
 
       yesBtn.style.transform = `scale(${yesScale})`;
       noBtn.style.transform = `scale(${Math.max(noScale, 0.35)})`;
 
-      if (noClicks === 1) noBtn.innerText = "Точно? 🥺";
-      if (noClicks === 2) noBtn.innerText = "Подумай ещё 😭";
-      if (noClicks === 3) noBtn.innerText = "Не нажимай 😅";
-      if (noClicks >= 4) noBtn.innerText = "нет";
-
-      createHeart(randomX, randomY);
+      const texts = ["Точно? 🥺", "Подумай ещё 😭", "Ну Анель 😅", "Не убегай от судьбы 💘", "нет"];
+      noBtn.innerText = texts[Math.min(texts.length - 1, Math.floor(Math.random() * texts.length))];
     }
 
     noBtn.addEventListener("mouseenter", moveNoButton);
@@ -256,36 +275,44 @@
     noBtn.addEventListener("touchstart", moveNoButton);
 
     yesBtn.addEventListener("click", () => {
-      message.style.display = "block";
-      dateBox.style.display = "block";
+      question.innerText = "Она сказала ДАААА 💞";
+      cat.innerText = "😻🎉";
+      cat.classList.add("happy");
       noBtn.style.display = "none";
-      yesBtn.innerText = "Свидание принято 💞";
-      startConfetti();
+      yesBtn.style.display = "none";
+      planner.style.display = "block";
+      startFireworks();
     });
 
-    function updateFinalText() {
-      if (dateInput.value && timeInput.value) {
-        finalText.innerHTML = `Готово! Наше свидание: ${dateInput.value} в ${timeInput.value} ❤️`;
+    placeButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        placeButtons.forEach(btn => btn.classList.remove("selected"));
+        button.classList.add("selected");
+        selectedPlace = button.innerText;
+        updateFinal();
+      });
+    });
+
+    dateInput.addEventListener("change", updateFinal);
+    timeInput.addEventListener("change", updateFinal);
+
+    function updateFinal() {
+      if (dateInput.value && timeInput.value && selectedPlace) {
+        finalText.style.display = "block";
+        finalText.innerHTML = `
+          Свидание запланировано 💖<br>
+          📅 Дата: ${dateInput.value}<br>
+          ⏰ Время: ${timeInput.value}<br>
+          📍 Место: ${selectedPlace}<br><br>
+          Анель, теперь назад пути нет 😌💘
+        `;
+        startFireworks();
       }
     }
 
-    dateInput.addEventListener("change", updateFinalText);
-    timeInput.addEventListener("change", updateFinalText);
-
-    function createHeart(x, y) {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerText = "💗";
-      heart.style.left = x + "px";
-      heart.style.top = y + "px";
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 1400);
-    }
-
     function createPetals() {
-      const petals = ["🌸", "🌷", "🌼", "💮"];
-      for (let i = 0; i < 25; i++) {
+      const petals = ["🌸", "🌷", "🌼", "💮", "💗"];
+      for (let i = 0; i < 30; i++) {
         const petal = document.createElement("div");
         petal.className = "petal";
         petal.innerText = petals[Math.floor(Math.random() * petals.length)];
@@ -296,22 +323,24 @@
       }
     }
 
-    function startConfetti() {
+    function startFireworks() {
+      const items = ["💖", "💘", "💕", "✨", "🌸", "🎉"];
       for (let i = 0; i < 45; i++) {
         setTimeout(() => {
-          const heart = document.createElement("div");
-          heart.className = "heart";
-          heart.innerText = ["💖", "💘", "🌸", "✨", "💕"][Math.floor(Math.random() * 5)];
-          heart.style.left = Math.random() * window.innerWidth + "px";
-          heart.style.top = window.innerHeight - 80 + "px";
-          document.body.appendChild(heart);
+          const firework = document.createElement("div");
+          firework.className = "firework";
+          firework.innerText = items[Math.floor(Math.random() * items.length)];
+          firework.style.left = Math.random() * window.innerWidth + "px";
+          firework.style.top = Math.random() * window.innerHeight + "px";
+          document.body.appendChild(firework);
 
-          setTimeout(() => heart.remove(), 1400);
-        }, i * 45);
+          setTimeout(() => firework.remove(), 1200);
+        }, i * 35);
       }
     }
 
     createPetals();
   </script>
+
 </body>
 </html>
