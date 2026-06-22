@@ -3,184 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Анель, plan your date 💐</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      overflow: hidden;
-      background: linear-gradient(135deg, #ffe6f2, #fff3d9, #e9fff3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .card {
-      width: 92%;
-      max-width: 470px;
-      padding: 28px 24px;
-      border-radius: 35px;
-      background: rgba(255,255,255,0.92);
-      box-shadow: 0 25px 70px rgba(255, 105, 180, 0.35);
-      text-align: center;
-      position: relative;
-      z-index: 5;
-    }
-
-    h1 {
-      color: #ff5fa8;
-      font-size: 30px;
-      margin: 0 0 10px;
-    }
-
-    p {
-      color: #8b5e6b;
-      font-size: 18px;
-    }
-
-    #catGif {
-      width: 190px;
-      max-width: 80%;
-      border-radius: 25px;
-      margin: 10px 0 15px;
-      box-shadow: 0 10px 25px rgba(255, 120, 170, 0.25);
-    }
-
-    .happy-cat {
-      animation: happyBounce 0.45s infinite alternate;
-    }
-
-    @keyframes happyBounce {
-      from { transform: scale(1) rotate(-3deg); }
-      to { transform: scale(1.08) rotate(3deg); }
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      min-height: 75px;
-    }
-
-    button {
-      border: none;
-      border-radius: 999px;
-      padding: 13px 24px;
-      font-size: 17px;
-      cursor: pointer;
-      transition: 0.25s ease;
-      white-space: nowrap;
-    }
-
-    #yesBtn {
-      background: linear-gradient(135deg, #ff78b7, #ff4f9a);
-      color: white;
-      box-shadow: 0 10px 25px rgba(255, 79, 154, 0.45);
-      z-index: 10;
-    }
-
-    #noBtn {
-      background: white;
-      color: #ff5fa8;
-      border: 2px solid #ffc1df;
-      position: fixed;
-      z-index: 20;
-    }
-
-    .planner {
-      display: none;
-      margin-top: 18px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 15px;
-      border: 1px solid #ffc1df;
-      font-size: 16px;
-      background: #fff8fc;
-    }
-
-    .places {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .place {
-      background: #fff0f8;
-      color: #ff4f9a;
-      border: 2px solid #ffc1df;
-      padding: 12px;
-      border-radius: 18px;
-      font-size: 15px;
-    }
-
-    .place.selected {
-      background: #ff7fbd;
-      color: white;
-      transform: scale(1.05);
-    }
-
-    .final {
-      display: none;
-      margin-top: 18px;
-      padding: 15px;
-      border-radius: 22px;
-      background: #fff0f8;
-      color: #ff4f9a;
-      font-size: 17px;
-      font-weight: bold;
-      line-height: 1.5;
-    }
-
-    .petal, .firework {
-      position: fixed;
-      pointer-events: none;
-    }
-
-    .petal {
-      top: -30px;
-      font-size: 22px;
-      animation: fall linear infinite;
-      z-index: 1;
-    }
-
-    @keyframes fall {
-      to { transform: translateY(110vh) rotate(360deg); }
-    }
-
-    .firework {
-      font-size: 28px;
-      animation: boom 1.2s ease-out forwards;
-      z-index: 50;
-    }
-
-    @keyframes boom {
-      from { transform: scale(0.4); opacity: 1; }
-      to { transform: scale(2.4) translateY(-90px); opacity: 0; }
-    }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 25px; }
-      button { font-size: 15px; padding: 11px 20px; }
-      .places { grid-template-columns: 1fr; }
-      #catGif { width: 165px; }
-    }
-  </style>
+  <title>Анель 💐</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <div class="card">
+  <div class="background-hearts"></div>
+
+  <main class="card">
     <h1>Анель, привет 💐</h1>
 
     <img id="catGif" src="images/cat-waiting.gif" alt="Милый котёнок" />
@@ -192,13 +22,16 @@
       <button id="noBtn">Нет 😅</button>
     </div>
 
-    <div class="planner" id="planner">
-      <p>Урааа! Тогда выбирай наш план 💘</p>
+    <section class="planner" id="planner">
+      <h2>Урааа! Выбирай наш план 💘</h2>
 
+      <label>📅 Дата</label>
       <input type="date" id="dateInput" />
+
+      <label>⏰ Время</label>
       <input type="time" id="timeInput" />
 
-      <p>Куда пойдём?</p>
+      <h3>📍 Куда пойдём?</h3>
 
       <div class="places">
         <button class="place">🌳 Парк</button>
@@ -210,121 +43,9 @@
       </div>
 
       <div class="final" id="finalText"></div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const planner = document.getElementById("planner");
-    const question = document.getElementById("question");
-    const catGif = document.getElementById("catGif");
-    const dateInput = document.getElementById("dateInput");
-    const timeInput = document.getElementById("timeInput");
-    const finalText = document.getElementById("finalText");
-    const placeButtons = document.querySelectorAll(".place");
-
-    let yesScale = 1;
-    let noScale = 1;
-    let selectedPlace = "";
-
-    function setNoPosition() {
-      noBtn.style.left = "55%";
-      noBtn.style.top = "55%";
-    }
-
-    window.addEventListener("load", setNoPosition);
-
-    function moveNoButton() {
-      const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-      const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-
-      noBtn.style.left = Math.random() * maxX + "px";
-      noBtn.style.top = Math.random() * maxY + "px";
-
-      yesScale += 0.18;
-      noScale -= 0.07;
-
-      yesBtn.style.transform = `scale(${yesScale})`;
-      noBtn.style.transform = `scale(${Math.max(noScale, 0.35)})`;
-
-      const texts = ["Точно? 🥺", "Подумай ещё 😭", "Ну Анель 😅", "Не убегай от судьбы 💘", "нет"];
-      noBtn.innerText = texts[Math.floor(Math.random() * texts.length)];
-    }
-
-    noBtn.addEventListener("mouseenter", moveNoButton);
-    noBtn.addEventListener("click", moveNoButton);
-    noBtn.addEventListener("touchstart", moveNoButton);
-
-    yesBtn.addEventListener("click", () => {
-      question.innerText = "АНЕЛЬ СКАЗАЛА ДААА 💞";
-      catGif.src = "images/cat-happy.gif";
-      catGif.classList.add("happy-cat");
-
-      noBtn.style.display = "none";
-      yesBtn.style.display = "none";
-      planner.style.display = "block";
-
-      startFireworks();
-    });
-
-    placeButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        placeButtons.forEach(btn => btn.classList.remove("selected"));
-        button.classList.add("selected");
-        selectedPlace = button.innerText;
-        updateFinal();
-      });
-    });
-
-    dateInput.addEventListener("change", updateFinal);
-    timeInput.addEventListener("change", updateFinal);
-
-    function updateFinal() {
-      if (dateInput.value && timeInput.value && selectedPlace) {
-        finalText.style.display = "block";
-        finalText.innerHTML = `
-          💖 Наше свидание запланировано 💖<br><br>
-          📅 Дата: ${dateInput.value}<br>
-          ⏰ Время: ${timeInput.value}<br>
-          📍 Место: ${selectedPlace}<br><br>
-          Анель, теперь назад пути нет 😌💘
-        `;
-        startFireworks();
-      }
-    }
-
-    function createPetals() {
-      const petals = ["🌸", "🌷", "🌼", "💮", "💗"];
-      for (let i = 0; i < 30; i++) {
-        const petal = document.createElement("div");
-        petal.className = "petal";
-        petal.innerText = petals[Math.floor(Math.random() * petals.length)];
-        petal.style.left = Math.random() * 100 + "vw";
-        petal.style.animationDuration = 5 + Math.random() * 5 + "s";
-        petal.style.animationDelay = Math.random() * 5 + "s";
-        document.body.appendChild(petal);
-      }
-    }
-
-    function startFireworks() {
-      const items = ["💖", "💘", "💕", "✨", "🌸", "🎉"];
-      for (let i = 0; i < 50; i++) {
-        setTimeout(() => {
-          const firework = document.createElement("div");
-          firework.className = "firework";
-          firework.innerText = items[Math.floor(Math.random() * items.length)];
-          firework.style.left = Math.random() * window.innerWidth + "px";
-          firework.style.top = Math.random() * window.innerHeight + "px";
-          document.body.appendChild(firework);
-
-          setTimeout(() => firework.remove(), 1200);
-        }, i * 35);
-      }
-    }
-
-    createPetals();
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
