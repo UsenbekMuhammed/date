@@ -23,52 +23,42 @@
 
     .card {
       width: 92%;
-      max-width: 460px;
-      padding: 30px 24px;
+      max-width: 470px;
+      padding: 28px 24px;
       border-radius: 35px;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       box-shadow: 0 25px 70px rgba(255, 105, 180, 0.35);
       text-align: center;
       position: relative;
       z-index: 5;
-      animation: pop 0.7s ease;
-    }
-
-    @keyframes pop {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
     }
 
     h1 {
       color: #ff5fa8;
-      font-size: 31px;
+      font-size: 30px;
       margin: 0 0 10px;
     }
 
     p {
       color: #8b5e6b;
       font-size: 18px;
-      margin-bottom: 20px;
     }
 
-    .cat {
-      font-size: 70px;
-      margin: 10px 0;
-      animation: catIdle 1.8s infinite ease-in-out;
+    #catGif {
+      width: 190px;
+      max-width: 80%;
+      border-radius: 25px;
+      margin: 10px 0 15px;
+      box-shadow: 0 10px 25px rgba(255, 120, 170, 0.25);
     }
 
-    .cat.happy {
-      animation: catHappy 0.45s infinite alternate;
+    .happy-cat {
+      animation: happyBounce 0.45s infinite alternate;
     }
 
-    @keyframes catIdle {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-8px) rotate(2deg); }
-    }
-
-    @keyframes catHappy {
-      from { transform: scale(1) rotate(-8deg); }
-      to { transform: scale(1.18) rotate(8deg); }
+    @keyframes happyBounce {
+      from { transform: scale(1) rotate(-3deg); }
+      to { transform: scale(1.08) rotate(3deg); }
     }
 
     .buttons {
@@ -105,8 +95,7 @@
 
     .planner {
       display: none;
-      margin-top: 20px;
-      animation: pop 0.6s ease;
+      margin-top: 18px;
     }
 
     input {
@@ -116,7 +105,6 @@
       border-radius: 15px;
       border: 1px solid #ffc1df;
       font-size: 16px;
-      color: #8b5e6b;
       background: #fff8fc;
     }
 
@@ -157,13 +145,13 @@
     .petal, .firework {
       position: fixed;
       pointer-events: none;
-      z-index: 1;
     }
 
     .petal {
       top: -30px;
       font-size: 22px;
       animation: fall linear infinite;
+      z-index: 1;
     }
 
     @keyframes fall {
@@ -171,27 +159,21 @@
     }
 
     .firework {
-      font-size: 26px;
+      font-size: 28px;
       animation: boom 1.2s ease-out forwards;
       z-index: 50;
     }
 
     @keyframes boom {
-      from {
-        transform: scale(0.4);
-        opacity: 1;
-      }
-      to {
-        transform: scale(2.2) translateY(-90px);
-        opacity: 0;
-      }
+      from { transform: scale(0.4); opacity: 1; }
+      to { transform: scale(2.4) translateY(-90px); opacity: 0; }
     }
 
     @media (max-width: 480px) {
-      h1 { font-size: 26px; }
-      .cat { font-size: 62px; }
+      h1 { font-size: 25px; }
       button { font-size: 15px; padding: 11px 20px; }
       .places { grid-template-columns: 1fr; }
+      #catGif { width: 165px; }
     }
   </style>
 </head>
@@ -201,11 +183,11 @@
   <div class="card">
     <h1>Анель, привет 💐</h1>
 
-    <div class="cat" id="cat">🐱💗</div>
+    <img id="catGif" src="images/cat-waiting.gif" alt="Милый котёнок" />
 
-    <p id="question">Пойдёшь со мной на свидание?</p>
+    <p id="question">Пойдёшь со мной на свидание? 🥺</p>
 
-    <div class="buttons" id="mainButtons">
+    <div class="buttons">
       <button id="yesBtn">Да 💖</button>
       <button id="noBtn">Нет 😅</button>
     </div>
@@ -235,8 +217,8 @@
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const planner = document.getElementById("planner");
-    const cat = document.getElementById("cat");
     const question = document.getElementById("question");
+    const catGif = document.getElementById("catGif");
     const dateInput = document.getElementById("dateInput");
     const timeInput = document.getElementById("timeInput");
     const finalText = document.getElementById("finalText");
@@ -267,7 +249,7 @@
       noBtn.style.transform = `scale(${Math.max(noScale, 0.35)})`;
 
       const texts = ["Точно? 🥺", "Подумай ещё 😭", "Ну Анель 😅", "Не убегай от судьбы 💘", "нет"];
-      noBtn.innerText = texts[Math.min(texts.length - 1, Math.floor(Math.random() * texts.length))];
+      noBtn.innerText = texts[Math.floor(Math.random() * texts.length)];
     }
 
     noBtn.addEventListener("mouseenter", moveNoButton);
@@ -275,12 +257,14 @@
     noBtn.addEventListener("touchstart", moveNoButton);
 
     yesBtn.addEventListener("click", () => {
-      question.innerText = "Она сказала ДАААА 💞";
-      cat.innerText = "😻🎉";
-      cat.classList.add("happy");
+      question.innerText = "АНЕЛЬ СКАЗАЛА ДААА 💞";
+      catGif.src = "images/cat-happy.gif";
+      catGif.classList.add("happy-cat");
+
       noBtn.style.display = "none";
       yesBtn.style.display = "none";
       planner.style.display = "block";
+
       startFireworks();
     });
 
@@ -300,7 +284,7 @@
       if (dateInput.value && timeInput.value && selectedPlace) {
         finalText.style.display = "block";
         finalText.innerHTML = `
-          Свидание запланировано 💖<br>
+          💖 Наше свидание запланировано 💖<br><br>
           📅 Дата: ${dateInput.value}<br>
           ⏰ Время: ${timeInput.value}<br>
           📍 Место: ${selectedPlace}<br><br>
@@ -325,7 +309,7 @@
 
     function startFireworks() {
       const items = ["💖", "💘", "💕", "✨", "🌸", "🎉"];
-      for (let i = 0; i < 45; i++) {
+      for (let i = 0; i < 50; i++) {
         setTimeout(() => {
           const firework = document.createElement("div");
           firework.className = "firework";
