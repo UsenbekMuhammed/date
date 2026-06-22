@@ -133,20 +133,18 @@ timeInput.addEventListener("change", updateFinal);
 
 function updateFinal() {
   if (dateInput.value && timeInput.value && selectedPlace) {
-    envelopeScreen.style.display = "block";
+    localStorage.setItem("dateDate", dateInput.value);
+    localStorage.setItem("dateTime", timeInput.value);
+    localStorage.setItem("datePlace", selectedPlace);
 
-    finalText.innerHTML = `
-      💌 <span style="font-size: 22px;">Наше свидание</span> 💌<br><br>
-      Анель выбрала:<br><br>
-      📅 Дата: ${dateInput.value}<br>
-      ⏰ Время: ${timeInput.value}<br>
-      📍 Место: ${selectedPlace}<br><br>
-      Жду с нетерпением 😌💘
-    `;
-
+    openLetterBtn.style.display = "inline-block";
     bigCelebration();
   }
 }
+
+openLetterBtn.addEventListener("click", () => {
+  window.location.href = "letter.html";
+});
 
 function createPetals() {
   const petals = ["🌸", "🌷", "🌼", "💮", "💗"];
@@ -203,3 +201,4 @@ function bigCelebration() {
 }
 
 createPetals();
+const openLetterBtn = document.getElementById("openLetterBtn");
