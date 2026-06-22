@@ -1,3 +1,26 @@
+const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+let musicStarted = false;
+
+document.addEventListener("click", () => {
+  if (!musicStarted) {
+    bgMusic.volume = 0.35;
+    bgMusic.play();
+    musicStarted = true;
+    musicBtn.innerText = "🔊";
+  }
+}, { once: true });
+
+musicBtn.addEventListener("click", () => {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    musicBtn.innerText = "🔊";
+  } else {
+    bgMusic.pause();
+    musicBtn.innerText = "🔇";
+  }
+});
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const planner = document.getElementById("planner");
