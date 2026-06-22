@@ -12,6 +12,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .card {
@@ -46,11 +47,13 @@ h1 {
   margin: 0 0 12px;
 }
 
-h2, h3 {
+h2,
+h3 {
   color: #ff5fa8;
 }
 
-p, label {
+p,
+label {
   color: #8b5e6b;
   font-size: 18px;
 }
@@ -65,7 +68,8 @@ p, label {
 }
 
 @keyframes softFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(-1deg);
   }
   50% {
@@ -108,7 +112,8 @@ button {
   background: linear-gradient(135deg, #ff79b7, #ff3f92);
   color: white;
   box-shadow: 0 12px 25px rgba(255, 79, 154, 0.45);
-  z-index: 10;
+  position: relative;
+  z-index: 30;
 }
 
 #yesBtn:hover {
@@ -119,7 +124,7 @@ button {
   background: white;
   color: #ff4f9a;
   border: 2px solid #ffc1df;
-  position: fixed;
+  position: relative;
   z-index: 20;
 }
 
@@ -181,28 +186,36 @@ input:focus {
   transform: scale(1.05);
 }
 
-.final {
+.open-letter-btn {
   display: none;
-  margin-top: 18px;
-  padding: 16px;
-  border-radius: 24px;
-  background: #fff0f8;
-  color: #ff4f9a;
-  font-size: 17px;
-  font-weight: bold;
-  line-height: 1.5;
-  animation: finalPop 0.6s ease;
+  margin-top: 22px;
+  background: linear-gradient(135deg, #ff79b7, #ff3f92);
+  color: white;
+  box-shadow: 0 12px 25px rgba(255, 79, 154, 0.45);
 }
 
-@keyframes finalPop {
-  from {
-    transform: scale(0.85);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.open-letter-btn:hover {
+  transform: scale(1.06);
+}
+
+#musicBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 9999;
+  transition: 0.3s;
+}
+
+#musicBtn:hover {
+  transform: scale(1.1);
 }
 
 .petal,
@@ -244,6 +257,7 @@ input:focus {
       0 0 #9b5de5,
       0 0 #00f5d4;
   }
+
   to {
     transform: scale(1.2);
     opacity: 0;
@@ -270,81 +284,42 @@ input:focus {
     transform: translateY(0) scale(0.8);
     opacity: 1;
   }
+
   to {
     transform: translateY(-130px) scale(1.7);
     opacity: 0;
   }
 }
 
-@media (max-width: 480px) {
-  h1 {
-    font-size: 25px;
-  }
+/* Третья страница с конвертиком */
 
-  #catGif {
-    width: 170px;
-  }
-
-  button {
-    font-size: 15px;
-    padding: 11px 18px;
-  }
-
-  .places {
-    grid-template-columns: 1fr;
-  }
-}
-#musicBtn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-
-  width: 60px;
-  height: 60px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(255,255,255,.9);
-
-  box-shadow: 0 8px 25px rgba(0,0,0,.15);
-
-  cursor: pointer;
-  font-size: 24px;
-
-  z-index: 9999;
-
-  transition: .3s;
+.letter-page {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-#musicBtn:hover {
-  transform: scale(1.1);
-}
-.envelope-screen {
-  display: none;
-  margin-top: 20px;
-  animation: envelopeAppear 0.8s ease;
-}
-
-@keyframes envelopeAppear {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.letter-card {
+  width: 92%;
+  max-width: 540px;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+  animation: cardIn 0.8s ease;
 }
 
 .envelope {
   position: relative;
   width: 100%;
-  min-height: 260px;
+  min-height: 300px;
   background: linear-gradient(135deg, #ff9fcb, #ff6faf);
-  border-radius: 26px;
-  padding: 22px;
-  box-shadow: 0 20px 45px rgba(255, 79, 154, 0.35);
+  border-radius: 30px;
+  padding: 30px;
+  box-shadow: 0 25px 60px rgba(255, 79, 154, 0.4);
   overflow: hidden;
 }
 
@@ -355,7 +330,7 @@ input:focus {
   bottom: 0;
   width: 50%;
   height: 55%;
-  background: rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.18);
   z-index: 1;
 }
 
@@ -367,83 +342,6 @@ input:focus {
 .envelope::after {
   right: 0;
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
-}
-
-.envelope-flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 52%;
-  background: #ff82bd;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  animation: openFlap 1s ease forwards;
-  transform-origin: top;
-  z-index: 3;
-}
-
-@keyframes openFlap {
-  0% {
-    transform: rotateX(0deg);
-  }
-  100% {
-    transform: rotateX(180deg);
-  }
-}
-
-.letter {
-  position: relative;
-  z-index: 2;
-  background: #fff7fc;
-  border-radius: 24px;
-  padding: 22px 16px;
-  color: #ff4f9a;
-  font-size: 17px;
-  font-weight: bold;
-  line-height: 1.6;
-  box-shadow: 0 10px 25px rgba(255, 79, 154, 0.2);
-  animation: letterUp 1s ease 0.4s both;
-}
-
-@keyframes letterUp {
-  from {
-    opacity: 0;
-    transform: translateY(80px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.open-letter-btn {
-  display: none;
-  margin-top: 22px;
-  background: linear-gradient(135deg, #ff79b7, #ff3f92);
-  color: white;
-  box-shadow: 0 12px 25px rgba(255, 79, 154, 0.45);
-}
-.letter-page {
-  overflow: hidden;
-}
-
-.letter-card {
-  width: 92%;
-  max-width: 520px;
-  text-align: center;
-  position: relative;
-  z-index: 5;
-}
-
-.envelope {
-  position: relative;
-  width: 100%;
-  min-height: 280px;
-  background: linear-gradient(135deg, #ff9fcb, #ff6faf);
-  border-radius: 28px;
-  padding: 28px;
-  box-shadow: 0 25px 60px rgba(255, 79, 154, 0.4);
-  overflow: hidden;
 }
 
 .envelope-flap {
@@ -470,7 +368,7 @@ input:focus {
   z-index: 4;
   background: #fff7fc;
   border-radius: 24px;
-  padding: 26px 18px;
+  padding: 28px 18px;
   color: #ff4f9a;
   font-size: 18px;
   font-weight: bold;
@@ -484,6 +382,7 @@ input:focus {
     opacity: 0;
     transform: translateY(90px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -495,4 +394,42 @@ input:focus {
   background: white;
   color: #ff4f9a;
   border: 2px solid #ffc1df;
+}
+
+.back-btn:hover {
+  transform: scale(1.06);
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 25px;
+  }
+
+  #catGif {
+    width: 170px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 11px 18px;
+  }
+
+  .places {
+    grid-template-columns: 1fr;
+  }
+
+  #musicBtn {
+    width: 50px;
+    height: 50px;
+    font-size: 21px;
+  }
+
+  .envelope {
+    min-height: 280px;
+    padding: 22px;
+  }
+
+  .letter {
+    font-size: 16px;
+  }
 }
