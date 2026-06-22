@@ -20,6 +20,18 @@ musicBtn.addEventListener("click", () => {
     bgMusic.pause();
     musicBtn.innerText = "🔇";
   }
+  let volume = 0.35;
+
+const fadeMusic = setInterval(() => {
+  volume += 0.05;
+
+  if (volume >= 0.7) {
+    volume = 0.7;
+    clearInterval(fadeMusic);
+  }
+
+  bgMusic.volume = volume;
+}, 300);
 });
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
