@@ -1,38 +1,6 @@
 const bgMusic = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 
-let musicStarted = false;
-
-document.addEventListener("click", () => {
-  if (!musicStarted) {
-    bgMusic.volume = 0.35;
-    bgMusic.play();
-    musicStarted = true;
-    musicBtn.innerText = "🔊";
-  }
-}, { once: true });
-
-musicBtn.addEventListener("click", () => {
-  if (bgMusic.paused) {
-    bgMusic.play();
-    musicBtn.innerText = "🔊";
-  } else {
-    bgMusic.pause();
-    musicBtn.innerText = "🔇";
-  }
-  let volume = 0.35;
-
-const fadeMusic = setInterval(() => {
-  volume += 0.05;
-
-  if (volume >= 0.7) {
-    volume = 0.7;
-    clearInterval(fadeMusic);
-  }
-
-  bgMusic.volume = volume;
-}, 300);
-});
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const planner = document.getElementById("planner");
@@ -41,12 +9,49 @@ const catGif = document.getElementById("catGif");
 const dateInput = document.getElementById("dateInput");
 const timeInput = document.getElementById("timeInput");
 const finalText = document.getElementById("finalText");
+const envelopeScreen = document.getElementById("envelopeScreen");
 const placeButtons = document.querySelectorAll(".place");
 
+let musicStarted = false;
 let yesScale = 1;
 let noScale = 1;
 let selectedPlace = "";
 let noClickCount = 0;
+
+document.addEventListener("click", () => {
+  if (!musicStarted) {
+    bgMusic.volume = 0.25;
+    bgMusic.play();
+    musicStarted = true;
+    musicBtn.innerText = "🔊";
+  }
+}, { once: true });
+
+musicBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+
+  if (bgMusic.paused) {
+    bgMusic.play();
+    musicBtn.innerText = "🔊";
+  } else {
+    bgMusic.pause();
+    musicBtn.innerText = "🔇";
+  }
+});
+
+function fadeMusicTo(targetVolume) {
+  let volume = bgMusic.volume;
+
+  const fadeMusic = setInterval(() => {
+    if (volume < targetVolume) {
+      volume += 0.03;
+    } else {
+      clearInterval(fadeMusic);
+    }
+
+    bgMusic.volume = Math.min(volume, targetVolume);
+  }, 250);
+}
 
 function setNoPosition() {
   const yesRect = yesBtn.getBoundingClientRect();
@@ -96,6 +101,13 @@ noBtn.addEventListener("click", moveNoButton);
 noBtn.addEventListener("touchstart", moveNoButton);
 
 yesBtn.addEventListener("click", () => {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    musicBtn.innerText = "🔊";
+  }
+
+  fadeMusicTo(0.7);
+
   question.innerText = "АНЕЛЬ СКАЗАЛА ДААА 💞";
   catGif.src = "images/cat-happy.gif";
   catGif.classList.add("happy-cat");
@@ -121,14 +133,15 @@ timeInput.addEventListener("change", updateFinal);
 
 function updateFinal() {
   if (dateInput.value && timeInput.value && selectedPlace) {
-    finalText.style.display = "block";
+    envelopeScreen.style.display = "block";
 
     finalText.innerHTML = `
-      💖 Наше свидание запланировано 💖<br><br>
+      💌 <span style="font-size: 22px;">Наше свидание</span> 💌<br><br>
+      Анель выбрала:<br><br>
       📅 Дата: ${dateInput.value}<br>
       ⏰ Время: ${timeInput.value}<br>
       📍 Место: ${selectedPlace}<br><br>
-      Анель, теперь назад пути нет 😌💘
+      Жду с нетерпением 😌💘
     `;
 
     bigCelebration();
