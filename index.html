@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan your date 💐</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe6f2, #fff7d6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(255, 120, 170, 0.3);
+      max-width: 420px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      color: #ff6fae;
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #8b5e6b;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      border: none;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    #yesBtn {
+      background: #ff8fc7;
+      color: white;
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+      background: #ff5fa8;
+    }
+
+    #noBtn {
+      background: #fff;
+      color: #ff6fae;
+      border: 2px solid #ffb6d9;
+      position: fixed;
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 32px;
+      animation: float 6s infinite ease-in-out;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-25px) rotate(10deg); }
+    }
+
+    .result {
+      display: none;
+      font-size: 26px;
+      color: #ff4f9a;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="flower" style="top: 10%; left: 15%;">🌸</div>
+  <div class="flower" style="top: 20%; right: 18%;">🌷</div>
+  <div class="flower" style="bottom: 15%; left: 20%;">🌼</div>
+  <div class="flower" style="bottom: 20%; right: 12%;">💐</div>
+
+  <div class="card">
+    <h1>Plan your date 💕</h1>
+    <p>Пойдёшь со мной на свидание?</p>
+
+    <div class="buttons">
+      <button id="yesBtn">Да 💖</button>
+      <button id="noBtn">Нет 😅</button>
+    </div>
+
+    <div class="result" id="result">
+      Урааа! Тогда это свидание официально запланировано 💘
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const result = document.getElementById("result");
+
+    noBtn.style.left = "55%";
+    noBtn.style.top = "55%";
+
+    noBtn.addEventListener("mouseenter", () => {
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    });
+
+    yesBtn.addEventListener("click", () => {
+      result.style.display = "block";
+      yesBtn.innerText = "Я знал 💞";
+      noBtn.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
