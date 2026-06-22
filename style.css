@@ -6,7 +6,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: linear-gradient(135deg, #ffe3f1, #fff2d8, #e6fff3);
   display: flex;
   justify-content: center;
