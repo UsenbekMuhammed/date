@@ -135,6 +135,8 @@ function updateFinal() {
 }
 
 openLetterBtn.addEventListener("click", () => {
+  localStorage.setItem("musicTime", bgMusic.currentTime);
+  localStorage.setItem("musicWasPlaying", bgMusic.paused ? "no" : "yes");
   window.location.href = "letter.html";
 });
 
