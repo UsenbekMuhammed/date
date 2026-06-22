@@ -415,6 +415,14 @@ input:focus {
     transform: translateY(0);
   }
 }
+
+.open-letter-btn {
+  display: none;
+  margin-top: 22px;
+  background: linear-gradient(135deg, #ff79b7, #ff3f92);
+  color: white;
+  box-shadow: 0 12px 25px rgba(255, 79, 154, 0.45);
+}
 .letter-page {
   overflow: hidden;
 }
